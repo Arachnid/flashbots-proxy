@@ -4,6 +4,7 @@ import { FlashbotsBundleProvider, FlashbotsBundleResolution, FlashbotsTransactio
 import express from 'express';
 import ganache from 'ganache';
 import readline from 'readline';
+import cors from "cors";
 
 const program = new Command();
 program
@@ -137,6 +138,7 @@ class BundleProxy {
 const proxy = new BundleProxy(provider);
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.post('/', async (req, res) => {
   const { id, method, params } = req.body;
