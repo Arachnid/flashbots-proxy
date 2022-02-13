@@ -56,7 +56,9 @@
   },
   "dependencies": {
     "@flashbots/ethers-provider-bundle": "^0.4.3",
+    "@types/cors": "^2.8.12",
     "commander": "^9.0.0",
+    "cors": "^2.8.5",
     "ethers": "^5.5.4",
     "express": "^4.17.2",
     "ganache": "^7.0.0-alpha.2"
