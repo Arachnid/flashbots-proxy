@@ -16,6 +16,9 @@ program.parse(process.argv);
 const options = program.opts();
 
 const GANACHE_CONFIG = {
+  chain: {
+    chainId: 1,
+  },
   fork: {
     url: options.rpc,
   },
@@ -81,7 +84,9 @@ class BundleProxy {
 
   async getBundle(): Promise<ethers.Transaction[]> {
     if(this.bundle === undefined) {
-      this.provider = new ethers.providers.Web3Provider(ganache.provider(GANACHE_CONFIG));
+      const options = Object.assign({}, GANACHE_CONFIG);
+      options.chain.chainId = this.baseProvider.network.chainId;
+      this.provider = new ethers.providers.Web3Provider(ganache.provider(options) as any);
       console.log(`Created fork at block ${await this.provider.getBlockNumber()}`);
       this.bundle = [];
     }
